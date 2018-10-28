@@ -3,7 +3,5 @@ django-paypal
 django-bootstrap3
 Pillow
 stripe
-crispy_forms
-allauth
-allauth.account
-allauth.socialaccount
+django-crispy-forms
+django-allauth
