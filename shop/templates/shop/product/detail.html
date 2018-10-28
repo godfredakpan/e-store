@@ -7,14 +7,16 @@
 {% endblock %}
 
 {% block content %}
-
+<button class="btn btn-danger">Please Note whatever you buy here is for Educational Purposes only - Godfred</button><br><br>
+ <a href="/shop">Go back</a>
     <div class="row">
         <div class="col-md-12">
+
             <div class="col-md-6 col-md-4">
             </div>
             <div class="col-md-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="{% if product.image %}{{ product.image.url }}
+                <div class="thumbnail card">
+                    <img  style="height: 300px !important;" src="{% if product.image %}{{ product.image.url }}
                               {% else %}{% static "img/no_image.png" %}{% endif %}"
                          class="img-responsive">
                     <div class="caption">

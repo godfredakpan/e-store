@@ -1,48 +1,64 @@
  {% load staticfiles%}
 
- <link rel="stylesheet" type="text/css" href='{%static "css/nav.css" %}'>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href='{%static "css/nav.css" %}'>
   <script src="{% static 'js/bootstrap.min.js' %}"></script> 
    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script> 
-  
+</head>
+<body>
 
- <div class="">
-    <!-- Static navbar -->
-    <nav class="navbar navbar" style="background-color: #000000;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                  <span class="sr-only">Ibom E-market</span>
-                  <span class="icon-bar top-bar"></span>
-                  <span class="icon-bar middle-bar"></span>
-                  <span class="icon-bar bottom-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'home' %}">Ibom E-market</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">Ibom E-market</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
                   {% url 'home' as home %} 
                   {% url 'about' as about %}  
                   {% url 'contact' as contact %}  
                   {% url 'account/login' as Login %}  
-                  {% url 'account/signup' as Signup %}  
-                    
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li {% if request.path == home %} class="active" {% endif %}><a href="{% url 'home' %}">Home <span class="sr-only"></span></a></li>
-                    <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
-                    <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'contact' %}">Contact</a></li>
-                   {% if not request.user.is_authenticated %} 
-                    <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'account_login' %}">Signin</a></li>
-                     <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'account_signup' %}">Signup</a></li>
-                   {% else %}
-                     <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'account_logout' %}">Logout</a></li>
-                   {% endif %}
-                  
-                </ul>
-                </ul>
-
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-        <!--/.container-fluid -->
-    </nav>
+                  {% url 'account/signup' as Signup %}
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Get Started <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Page 1-1</a></li>
+            <li><a href="#">Page 1-2</a></li>
+            <li><a href="#">Page 1-3</a></li>
+          </ul>
+        </li>
+        <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+        <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'contact' %}">Contact</a></li>
+        <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li {% if request.path == contact %} class="active" {% endif %}><a href="shop/">Shop</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+         {% if not request.user.is_authenticated %} 
+                    <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Signin</a></li>
+                    <li><a href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span> Signup</a>
+                </li>
+        {% else %}
+                <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'account_logout' %}">Logout</a>
+            </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+</body>
+</html>
