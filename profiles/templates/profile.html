@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile Page</title>
+</head>
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
+<!-- <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}'> -->
+<body>
+	{%include 'nav-bar.html'%}
+
+<div class="container">
+
+	<h1>User Page</h1>
+	<hr>
+	<button class="btn btn-success">{{request.user.username}}</button>
+	<button class="btn btn-primary">{{request.user.email}}</button>
+	<div><img src="{{user.profile.avatar.url}}" class="img-responsive" height="100"></div>
+	<button class="btn btn-danger">Hello</button>
+	
+
+
+
+
+</div>
+{% endblock %}
+
+
+
+</body>
+</html>

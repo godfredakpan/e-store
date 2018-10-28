@@ -1,0 +1,34 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+</head>
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
+<!-- <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}'> -->
+<body>
+	{%include 'nav-bar.html'%}
+
+<div class="container">
+
+	<h1>About Page</h1>
+	<hr>
+	<button class="btn btn-success">Hello</button>
+	<button class="btn btn-primary">Hello</button>
+	<button class="btn btn-danger">Hello</button>
+	
+
+
+
+
+</div>
+{% endblock %}
+
+
+
+</body>
+</html>

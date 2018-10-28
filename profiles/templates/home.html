@@ -1,0 +1,198 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+</head>
+<body>
+
+{% block content%}
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
+  <link rel="stylesheet" type="text/css" href='{% static "css/argon.css" %}'>
+  <link rel="stylesheet" type="text/css" href='{% static "css/argon.min.css" %}'>
+
+  <header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--not-bottom headroom--pinned headroom--not-top">
+      <div class="container">
+        <a class="navbar-brand mr-lg-5" href="{% url 'home' %}">
+          Ibom E-market
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+          <div class="navbar-collapse-header">
+            <div class="row">
+              <div class="col-6 collapse-brand">
+                <a href="./index.html">
+                  <img src="./assets/img/brand/blue.png">
+                </a>
+              </div>
+              <div class="col-6 collapse-close">
+                
+              </div>
+            </div>
+          </div>
+          <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                <i class="ni ni-ui-04 d-lg-none"></i>
+                <span class="nav-link-inner--text">Get Started</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-xl">
+                <div class="dropdown-menu-inner">
+                  <a href="{% url 'home'  %}" class="media d-flex align-items-center">
+                    <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                      <i class="ni ni-spaceship"></i>
+                    </div>
+                    <div class="media-body ml-3">
+                      <h6 class="heading text-primary mb-md-1">Getting started</h6>
+                      
+                    </div>
+                  </a>
+                  
+                 
+                    <div class="media-body ml-3">
+                      
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li>
+             {% if not request.user.is_authenticated %} 
+
+                    <li style="margin-right: 20px; color: white;" class="nav-link-inner--text" {% if request.path == account_login %} class="active" {% endif %}><a href="{% url 'account_login' %}">Signin </a></li>
+                    
+                     <li style="color: white; margin-right: 20px;" {% if request.path == account_signup %} class="active" {% endif %}><a href="{% url 'account_signup' %}">Signup</a></li>
+                     <li></li>
+
+                   {% else %}
+                    <li style="margin-right: 20px; color: white;" class="nav-link-inner--text" {% if request.path == account_login %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Dashboard </a></li>
+                     <li style="color: white; margin-right: 20px;" {% if request.path == account_logout %} class="active" {% endif %}><a href="{% url 'account_logout' %}">Logout</a></li>
+                   {% endif %}
+              </li>
+            <li>
+              <li style="color: white;"><a href="/shop/">Store</a></li>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+<section class="section section-lg section-shaped">
+      <div class="shape shape-style-1 shape-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="container py-md">
+        <div class="row row-grid justify-content-between align-items-center">
+          <div class="col-lg-6">
+            <h3 class="display-3 text-white">Welcome to 
+              <span class="text-white">Ibom E-Market</span>
+            </h3>
+            {% if not request.user.is_authenticated %}
+            <p class="lead text-white">Kindly Create and account and click checkout page in your dashboad</p>
+            {% else %}
+            <p class="lead text-white">Kindly Visit your Store to purchase goods</p>
+            {% endif %}
+            <div class="btn-wrapper">
+              {% if not request.user.is_authenticated %}
+              <a href="{% url 'login' %}" class="btn btn-success">Login Page</a>
+              <a href="{% url 'signup' %}" class="btn btn-white">Register Page</a>
+                {% endif %}
+            </div>
+          </div>
+          <div class="col-lg-5 mb-lg-auto">
+            <div class="transform-perspective-right">
+              <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-white pb-5">
+                  <div class="text-muted text-center mb-3">
+                    {% if not request.user.is_authenticated %}
+                    <small>Sign in with</small>
+                  </div>
+                  <div class="btn-wrapper text-center">
+                    <a href="#" class="btn btn-neutral btn-icon">
+                      <span class="btn-inner--icon">
+                        <img src="{% static 'img/icons/github.svg' %}">
+                      </span>
+                      <span class="btn-inner--text">Github</span>
+                    </a>
+                    <a href="#" class="btn btn-neutral btn-icon">
+                      <span class="btn-inner--icon">
+                        <img src="{% static 'img/icons/google.svg' %}">
+                      </span>
+                      <span class="btn-inner--text">Google</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body px-lg-5 py-lg-5">
+                  <div class="text-center text-muted mb-4">
+                     
+                    <small>Or sign in with credentials</small>
+                    {% endif %}
+                  </div>
+                  {% if request.user.is_authenticated %} 
+
+                 <h3 class="h1">Hello {{request.user.username|title}}</h3>
+
+                 {% else %}
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                 {% csrf_token %}
+
+                  <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-3 focused">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                        </div>
+                        <div id="div_id_login" class="form-group"> <label for="id_login" class="control-label  requiredField">
+                      Login<span class="asteriskField">*</span> </label> <div class="controls "> <input name="login" autofocus="autofocus" class="textinput textInput form-control" required="" placeholder="Username or e-mail" id="id_login" type="text"> </div> </div> <div id="div_id_password" class="form-group"> <label for="id_password" class="control-label  requiredField">
+                      Password<span class="asteriskField">*</span> </label> <div class="controls "> <input name="password" class="textinput textInput form-control" required="" placeholder="Password" id="id_password" type="password"> </div> </div> <div class="form-group"> <div id="div_id_remember" class="checkbox"> <label for="id_remember" class=""> <input name="remember" class="checkboxinput" id="id_remember" type="checkbox">
+                          Remember Me
+                      </label> </div> </div>
+
+        
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+        <a class="btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
+
+        <button class="btn btn-success" type="submit">Sign In</button>
+      </form>
+      
+      {% endif %}
+                
+       
+        </div>
+      </div>
+      <!-- SVG separator -->
+      <div class="separator separator-bottom separator-skew">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </section>
+<br>
+</div>
+
+<footer style="text-align: center; margin-bottom: 20px;">
+  <div class="copyright">
+    <p>&copy 2018 - Ibom-Emarket</p>
+  </div>
+</footer>
+
+{% endblock %}
+
+
+
+</body>
+</html>
