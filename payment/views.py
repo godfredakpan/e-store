@@ -19,7 +19,7 @@ def payment_process(request):
             Decimal('.01')),
         'item_name': 'Order {}'.format(order.id),
         'invoice': str(order.id),
-        'currency_code': 'TWD',
+        'currency_code': 'NGN',
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,

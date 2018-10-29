@@ -5,3 +5,5 @@ Pillow
 stripe
 django-crispy-forms
 django-allauth
+gunicorn
+django-heroku
